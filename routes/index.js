@@ -11,19 +11,21 @@ const connection = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
+var filmData = [];
+
 connection.connect();
 
 connection.query("SELECT * FROM film", (err, rows, fields) => {
   if (err) throw err;
 
-  console.log(rows[0]);
+  filmData = rows;
 });
 
 connection.end();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  res.render("index", { films: filmData });
 });
 
 module.exports = router;
