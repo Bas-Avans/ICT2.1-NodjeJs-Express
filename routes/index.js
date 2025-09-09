@@ -28,4 +28,12 @@ router.get("/", function (req, res, next) {
   res.render("index", { films: filmData });
 });
 
+router.get("/films/:id", function (req, res, next) {
+  const film = filmData.find((f) => f.film_id === parseInt(req.params.id));
+  if (!film) {
+    return res.status(404).send("Film not found");
+  }
+  res.render("film", { film });
+});
+
 module.exports = router;
