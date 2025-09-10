@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    .row
+      .col-md-8.offset-md-2.text-center
+        h1.display-4 Actors
+        include ../components/search
+        hr.my-4
+        .row.mt-4
+          if actors.length
+            each actor in actors
+              .col-md-4.mb-4
+                .card.h-100
+                  .card-body
+                    h5.card-title= `${actor.first_name} ${actor.last_name}`
+                    a.btn.btn-primary(href=`/actors/${actor.actor_id}`) View Details
+          else
+            .col-12
+              .alert.alert-info No actors found.
+        include ../components/pagination

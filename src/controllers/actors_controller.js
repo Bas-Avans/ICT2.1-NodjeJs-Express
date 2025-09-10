@@ -1,45 +1,45 @@
-const filmService = require("../services/films_service");
+const actorService = require("../services/actors_service");
 const { getPagination } = require("../util/pagination");
 
 /*
-  Return the films page
+  Return the actors page
 */
-exports.getFilms = (req, res, next) => {
+exports.getActors = (req, res, next) => {
   const searchQuery = req.query.search || "";
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.limit) || 12;
 
-  filmService.searchFilms(searchQuery, page, pageSize, (err, result) => {
+  actorService.searchActors(searchQuery, page, pageSize, (err, result) => {
     if (err) {
       next({ error: err.message });
     } else {
       const totalPages = Math.ceil(result.totalCount / pageSize);
       const pagination = getPagination(page, totalPages);
       const model = {
-        films: result.films,
+        actors: result.actors,
         searchQuery,
         currentPage: page,
         totalPages,
         pagination,
-        path: "films",
+        path: "actors",
       };
-      res.render("film/films", model);
+      res.render("actor/actors", model);
     }
   });
 };
 
 /*
-  Return the film details page
+  Return the actor details page
 */
-exports.getFilm = (req, res, next) => {
-  const filmId = req.params.id;
+exports.getActor = (req, res, next) => {
+  const actorId = req.params.id;
 
-  filmService.getFilmById(filmId, (err, film) => {
+  actorService.getActorById(actorId, (err, actor) => {
     if (err) {
       next({ error: err.message });
     } else {
-      const model = { film };
-      const view = "film/film";
+      const model = { actor };
+      const view = "actor/actor";
       res.render(view, model);
     }
   });

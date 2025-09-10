@@ -1,11 +1,11 @@
-extends layout
+extends ../layout
 
 block content
   .container.mt-5
     .row
       .col-md-8.offset-md-2.text-center
         h1.display-4 Films
-        include components/search
+        include ../components/search
         hr.my-4
         .row.mt-4
           if films.length
@@ -19,4 +19,4 @@ block content
           else
             .col-12
               .alert.alert-info No films found.
-        include components/pagination
+        include ../components/pagination

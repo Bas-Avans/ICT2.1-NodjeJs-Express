@@ -5,13 +5,26 @@ const pool = require("../util/mysql");
 */
 exports.getFilmById = (filmId, callback) => {
   pool.query(
-    "SELECT * FROM film WHERE film_id = ?",
+    "SELECT * FROM film f JOIN film_category fc ON f.film_id=fc.film_id JOIN category c ON c.category_id=fc.category_id WHERE f.film_id = ?",
     [filmId],
     (err, results) => {
       if (err) {
-        return callback(err, null);
+        return callback(err);
       }
-      callback(null, results[0]);
+      const film = results[0];
+
+      pool.query(
+        "SELECT * FROM actor a JOIN film_actor fa ON a.actor_id=fa.actor_id WHERE fa.film_id=?",
+        [filmId],
+        (err, actorResults) => {
+          if (err) {
+            return callback(err);
+          }
+          film.cast = actorResults;
+
+          callback(null, film);
+        }
+      );
     }
   );
 };
