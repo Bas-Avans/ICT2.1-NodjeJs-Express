@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-6
+        .card.shadow
+          .card-body
+            h2.mb-4.text-center Login
+            form(action="/login" method="POST")
+              .mb-3
+                label.form-label(for="username") Username
+                input#username.form-control(type="text" name="username" required placeholder="Enter your username")
+              .mb-3
+                label.form-label(for="password") Password
+                input#password.form-control(type="password" name="password" required placeholder="Enter your password")
+              button.btn.btn-primary.w-100(type="submit") Login
+            .mt-3.text-center
+              span Don't have an account? 
+              a(href="/register") Register
