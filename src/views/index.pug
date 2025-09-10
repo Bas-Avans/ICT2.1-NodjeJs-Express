@@ -7,11 +7,3 @@ block content
         h1.display-4 Express
         p.lead Welcome to Express
         hr.my-4
-        .row.mt-4
-          each film in films
-            .col-md-4.mb-4
-              .card.h-100
-                .card-body
-                  h5.card-title= film.title
-                  p.card-text= film.description
-                  a.btn.btn-primary(href=`/films/${film.film_id}`) View Details
