@@ -7,7 +7,7 @@ router.get("/", function (req, res, next) {
   res.render("index");
 });
 
-/* Get all films */
+/* GET all films */
 router.get("/films", filmController.getFilms);
 
 /* GET film by ID */

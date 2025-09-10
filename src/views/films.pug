@@ -5,10 +5,7 @@ block content
     .row
       .col-md-8.offset-md-2.text-center
         h1.display-4 Films
-        form(method="GET", action="/films", class="mb-4")
-          .input-group
-            input.form-control(type="text", name="search", placeholder="Search films..." value=searchQuery)
-            button.btn.btn-outline-secondary(type="submit") Search
+        include components/search
         hr.my-4
         .row.mt-4
           if films.length
@@ -22,3 +19,4 @@ block content
           else
             .col-12
               .alert.alert-info No films found.
+        include components/pagination

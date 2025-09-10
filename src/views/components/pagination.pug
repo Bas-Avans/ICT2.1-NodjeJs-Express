@@ -1,0 +1,26 @@
+if totalPages > 1
+  .d-flex.justify-content-center.mb-4
+    nav
+      ul.pagination
+        if currentPage > 1
+          li.page-item
+            a.page-link(href=`/films?search=${searchQuery}&page=${currentPage - 1}`) Previous
+        else
+          li.page-item.disabled
+            span.page-link Previous
+        each page in pagination
+          if page === '...'
+            li.page-item.disabled
+              span.page-link &hellip;
+          else if page === currentPage
+            li.page-item.active
+              span.page-link= page
+          else
+            li.page-item
+              a.page-link(href=`/films?search=${searchQuery}&page=${page}`)= page
+        if currentPage < totalPages
+          li.page-item
+            a.page-link(href=`/films?search=${searchQuery}&page=${currentPage + 1}`) Next
+        else
+          li.page-item.disabled
+            span.page-link Next
