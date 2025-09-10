@@ -6,16 +6,16 @@ block content
       .col-md-8.offset-md-2.text-center
         h1.display-4 Films
         include ../components/search
+        p.text-muted Showing #{films.length} / #{totalCount} films
         hr.my-4
         .row.mt-4
           if films.length
             each film in films
               .col-md-4.mb-4
-                .card.h-100
+                a.card.h-100(href=`/films/${film.film_id}`)
                   .card-body
                     h5.card-title= film.title
                     p.card-text= film.description
-                    a.btn.btn-primary(href=`/films/${film.film_id}`) View Details
           else
             .col-12
               .alert.alert-info No films found.

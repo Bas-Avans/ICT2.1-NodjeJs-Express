@@ -7,7 +7,7 @@ const { getPagination } = require("../util/pagination");
 exports.getActors = (req, res, next) => {
   const searchQuery = req.query.search || "";
   const page = parseInt(req.query.page) || 1;
-  const pageSize = parseInt(req.query.limit) || 12;
+  const pageSize = parseInt(req.query.limit) || 18;
 
   actorService.searchActors(searchQuery, page, pageSize, (err, result) => {
     if (err) {
@@ -19,6 +19,7 @@ exports.getActors = (req, res, next) => {
         actors: result.actors,
         searchQuery,
         currentPage: page,
+        totalCount: result.totalCount,
         totalPages,
         pagination,
         path: "actors",

@@ -14,7 +14,7 @@ exports.getActorById = (actorId, callback) => {
       const actor = results[0];
 
       pool.query(
-        "SELECT * FROM actor a JOIN film_actor fa ON a.actor_id=fa.actor_id WHERE fa.actor_id=?",
+        "SELECT * FROM film f JOIN film_actor fa ON f.film_id=fa.film_id WHERE fa.actor_id=?",
         [actorId],
         (err, filmResults) => {
           if (err) {

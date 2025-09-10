@@ -19,6 +19,7 @@ exports.getFilms = (req, res, next) => {
         films: result.films,
         searchQuery,
         currentPage: page,
+        totalCount: result.totalCount,
         totalPages,
         pagination,
         path: "films",
