@@ -2,11 +2,10 @@ const express = require("express");
 const router = express.Router();
 const filmController = require("../controllers/films_controller");
 const actorController = require("../controllers/actors_controller");
+const indexController = require("../controllers/index_controller");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index");
-});
+router.get("/", indexController.getIndex);
 
 /* GET all films page */
 router.get("/films", filmController.getFilms);

@@ -14,7 +14,7 @@ exports.getActorById = (actorId, callback) => {
       const actor = results[0];
 
       pool.query(
-        "SELECT * FROM film f JOIN film_actor fa ON f.film_id=fa.film_id WHERE fa.actor_id=?",
+        "SELECT * FROM film AS f JOIN film_actor AS fa ON f.film_id=fa.film_id WHERE fa.actor_id=?",
         [actorId],
         (err, filmResults) => {
           if (err) {
@@ -53,6 +53,18 @@ exports.searchActors = (searchQuery, page, pageSize, callback) => {
           callback(null, { actors: actorResults, totalCount });
         }
       );
+    }
+  );
+};
+
+exports.get10MostActiveActors = (callback) => {
+  pool.query(
+    "SELECT a.*, COUNT(fa.film_id) AS film_count FROM actor a JOIN film_actor fa ON a.actor_id = fa.actor_id GROUP BY a.actor_id ORDER BY film_count DESC LIMIT 10",
+    (err, results) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, results);
     }
   );
 };
