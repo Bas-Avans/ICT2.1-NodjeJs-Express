@@ -7,3 +7,13 @@ block content
         h1.display-4 Express
         p.lead Welcome to Express
         hr.my-4
+        h2 Top 10 Most Rented Films
+        ul.list-unstyled
+          each film in films
+            li
+              a(href=`/films/${film.film_id}`) #{film.title} - #{film.rentals} rentals
+        h2 Top 10 Most Active Actors
+        ul.list-unstyled
+          each actor in actors
+            li
+              a(href=`/actors/${actor.actor_id}`) #{actor.first_name} #{actor.last_name} - #{actor.film_count} films
