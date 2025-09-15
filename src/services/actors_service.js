@@ -59,7 +59,12 @@ exports.searchActors = (searchQuery, page, pageSize, callback) => {
 
 exports.get10MostActiveActors = (callback) => {
   pool.query(
-    "SELECT a.*, COUNT(fa.film_id) AS film_count FROM actor a JOIN film_actor fa ON a.actor_id = fa.actor_id GROUP BY a.actor_id ORDER BY film_count DESC LIMIT 10",
+    `SELECT a.*, COUNT(fa.film_id) AS film_count FROM actor a 
+    JOIN film_actor fa ON a.actor_id = fa.actor_id 
+    GROUP BY a.actor_id 
+    ORDER BY film_count 
+    DESC 
+    LIMIT 10`,
     (err, results) => {
       if (err) {
         return callback(err);

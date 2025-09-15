@@ -21,7 +21,10 @@ block content
                   | #{film.rating}
                 li.list-group-item
                   strong Category: 
-                  | #{film.name}
+                  | #{film.category_name}
+                li.list-group-item
+                  strong Language: 
+                  | #{film.language_name}
           h1.display-4.mb-3 Cast
           .row.mt-4
             each actor in film.cast

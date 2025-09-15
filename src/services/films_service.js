@@ -5,7 +5,11 @@ const pool = require("../util/mysql");
 */
 exports.getFilmById = (filmId, callback) => {
   pool.query(
-    "SELECT * FROM film AS f JOIN film_category AS fc ON f.film_id=fc.film_id JOIN category AS c ON c.category_id=fc.category_id WHERE f.film_id = ?",
+    `SELECT f.*, c.name as category_name, l.name as language_name FROM film AS f 
+    JOIN language AS l ON l.language_id=f.language_id 
+    JOIN film_category AS fc ON f.film_id=fc.film_id 
+    JOIN category AS c ON c.category_id=fc.category_id 
+    WHERE f.film_id = ?`,
     [filmId],
     (err, results) => {
       if (err) {
@@ -14,7 +18,9 @@ exports.getFilmById = (filmId, callback) => {
       const film = results[0];
 
       pool.query(
-        "SELECT * FROM actor AS a JOIN film_actor AS fa ON a.actor_id=fa.actor_id WHERE fa.film_id=?",
+        `SELECT * FROM actor AS a 
+        JOIN film_actor AS fa ON a.actor_id=fa.actor_id 
+        WHERE fa.film_id=?`,
         [filmId],
         (err, actorResults) => {
           if (err) {
@@ -59,7 +65,13 @@ exports.searchFilms = (searchQuery, page, pageSize, callback) => {
 
 exports.get10MostRentedFilms = (callback) => {
   pool.query(
-    "SELECT f.*, COUNT(r.rental_id) AS rentals FROM film AS f JOIN inventory AS i ON f.film_id=i.film_id JOIN rental AS r ON r.inventory_id=i.inventory_id GROUP BY f.film_id ORDER BY rentals DESC LIMIT 10",
+    `SELECT f.*, COUNT(r.rental_id) AS rentals FROM film AS f 
+    JOIN inventory AS i ON f.film_id=i.film_id 
+    JOIN rental AS r ON r.inventory_id=i.inventory_id 
+    GROUP BY f.film_id 
+    ORDER BY rentals 
+    DESC 
+    LIMIT 10`,
     (err, results) => {
       if (err) {
         return callback(err);
