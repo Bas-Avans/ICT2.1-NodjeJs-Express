@@ -9,8 +9,11 @@ block content
             h2.mb-4.text-center Register
             form(action="/register" method="POST")
               .mb-3
-                label.form-label(for="username") Username
-                input#username.form-control(type="text" name="username" required placeholder="Choose a username")
+                label.form-label(for="firstname") First Name
+                input#firstname.form-control(type="text" name="firstname" required placeholder="Enter your first name")
+              .mb-3
+                label.form-label(for="lastname") Last Name
+                input#lastname.form-control(type="text" name="lastname" required placeholder="Enter your last name")
               .mb-3
                 label.form-label(for="email") Email
                 input#email.form-control(type="email" name="email" required placeholder="Enter your email")

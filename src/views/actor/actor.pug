@@ -10,8 +10,4 @@ block content
           h1.display-4.mb-3 Films
           .row.mt-4
             each film in actor.films
-              .col-md-4.mb-4
-                a.card.h-100(href=`/films/${film.film_id}`)
-                  .card-body
-                    h5.card-title= film.title
-                    p.card-text= film.description
+              include ../components/film_card

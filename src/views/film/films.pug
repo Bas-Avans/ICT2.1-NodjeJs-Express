@@ -11,11 +11,7 @@ block content
         .row.mt-4
           if films.length
             each film in films
-              .col-md-4.mb-4
-                a.card.h-100(href=`/films/${film.film_id}`)
-                  .card-body
-                    h5.card-title= film.title
-                    p.card-text= film.description
+              include ../components/film_card
           else
             .col-12
               .alert.alert-info No films found.

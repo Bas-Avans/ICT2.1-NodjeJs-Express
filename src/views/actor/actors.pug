@@ -11,10 +11,7 @@ block content
         .row.mt-4
           if actors.length
             each actor in actors
-              .col-md-4.mb-4
-                a.card.h-100(href=`/actors/${actor.actor_id}`)
-                  .card-body
-                    h5.card-title= `${actor.first_name} ${actor.last_name}`
+              include ../components/actor_card
           else
             .col-12
               .alert.alert-info No actors found.

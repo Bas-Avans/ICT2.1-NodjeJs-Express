@@ -1,0 +1,6 @@
+.col-md-4.mb-4
+  a.card.h-100(href=`/films/${film.film_id}` style="text-decoration: none;")
+    img.card-img-top(src=`https://picsum.photos/seed/${film.title}/300/200` alt=`${film.title}`)
+    .card-body
+      h5.card-title= film.title
+      p.card-text= film.description
