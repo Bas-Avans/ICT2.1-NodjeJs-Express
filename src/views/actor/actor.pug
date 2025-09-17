@@ -5,9 +5,18 @@ block content
     .row
       .col-md-8.offset-md-2
         .text-center
-          h1.display-4.mb-3= `${actor.first_name} ${actor.last_name}`
+          .row.text-start.mb-4
+            .col-auto
+              img.rounded-circle.shadow(
+                src=`https://api.dicebear.com/9.x/big-ears-neutral/svg?seed=${actor.actor_id}`
+                alt="avatar"
+                style="width: 120px; height: 120px; margin-right: 20px;"
+              )
+            .col
+              h1.display-4.mb-3= `${actor.first_name} ${actor.last_name}`
+              p.lead.mb-4= `Has played in ${actor.films.length} films.`
           hr.my-4
-          h1.display-4.mb-3 Films
+          h2.display-5.mb-4 Films
           .row.mt-4
             each film in actor.films
               include ../components/film_card

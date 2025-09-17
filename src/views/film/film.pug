@@ -5,27 +5,30 @@ block content
     .row
       .col-md-8.offset-md-2
         .text-center
-          h1.display-4.mb-3= film.title
-          p.lead.mb-4= film.description
-          .card.mx-auto.mt-4(style="max-width: 400px;")
-            .card-body
-              ul.list-group.list-group-flush
-                li.list-group-item
-                  strong Release Year: 
-                  | #{film.release_year}
-                li.list-group-item
-                  strong Length: 
-                  | #{film.length} minutes
-                li.list-group-item
-                  strong Rating: 
-                  | #{film.rating}
-                li.list-group-item
-                  strong Category: 
-                  | #{film.category_name}
-                li.list-group-item
-                  strong Language: 
-                  | #{film.language_name}
-          h1.display-4.mb-3 Cast
+          .row.text-start.mb-4.justify-content-center.align-items-center
+            .col-auto
+              img.shadow.rounded(src=`https://picsum.photos/seed/${film.title}/300/200` alt=`${film.title}`)
+            .col
+              h1.display-4.mb-3= film.title
+              p.lead.mb-4= film.description
+              .row.mb-3.g-2
+                .col-auto
+                  i.bi.bi-calendar3.me-2
+                  span= film.release_year
+                .col-auto
+                  i.bi.bi-clock.me-2
+                  span= `${film.length} minutes`
+                .col-auto
+                  i.bi.bi-star.me-2
+                  span= film.rating
+                .col-auto
+                  i.bi.bi-tags.me-2
+                  span= film.category_name
+                .col-auto
+                  i.bi.bi-translate.me-2
+                  span= film.language_name
+          hr.my-4
+          h2.display-5.mb-4 Cast
           .row.mt-4
             each actor in film.cast
               include ../components/actor_card
