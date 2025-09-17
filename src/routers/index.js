@@ -17,17 +17,4 @@ router.get("/actors", actorController.getActors);
 /* GET actor by ID page */
 router.get("/actors/:id", actorController.getActor);
 
-/* GET login page */
-router.get("/login", function (req, res, next) {
-  res.render("auth/login");
-});
-/* GET register page */
-router.get("/register", function (req, res, next) {
-  res.render("auth/register");
-});
-/* Get account details page */
-router.get("/account", function (req, res, next) {
-  res.render("auth/account");
-});
-
 module.exports = router;

@@ -1,10 +1,14 @@
+require("dotenv").config();
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var session = require("express-session");
 
 var indexRouter = require("./src/routers/index");
+var authRouter = require("./src/routers/auth");
 
 var app = express();
 
@@ -18,7 +22,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// Session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }, // Set to true if using HTTPS
+  })
+);
+
+// Middleware to supply user data to all views
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = !!req.session.user;
+  res.locals.user = req.session.user;
+  next();
+});
+
 app.use("/", indexRouter);
+app.use("/", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -7,12 +7,14 @@
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^17.2.2",
     "express": "~4.16.1",
+    "express-session": "^1.18.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^3.14.4",

@@ -23,10 +23,15 @@ html(data-bs-theme="dark")
               a.nav-link.fs-5(href='/actors') Actors
           //- Later check if signed in and then show account details page
           ul.navbar-nav.ms-auto.d-flex.align-items-center
-            li.nav-item
-              a.nav-link.fs-5(href='/login') Login
-            li.nav-item
-              a.nav-link.fs-5(href='/register') Register
+            if isAuthenticated
+              li.nav-item
+                a.nav-link.fs-5(href='/account') Account
+            else
+              li.nav-item
+                a.nav-link.fs-5(href='/login') Login
+              li.nav-item
+                a.nav-link.fs-5(href='/register') Register
+            li.nav-item.border-start.mx-2(style="height:32px")
             li.nav-item
               button.btn.btn-link.nav-link.fs-5(type="button", id="themeToggle", aria-label="Toggle dark/light mode")
                 i.bi.bi-moon-fill#themeIcon

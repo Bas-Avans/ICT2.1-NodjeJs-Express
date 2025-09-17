@@ -7,6 +7,8 @@ block content
         .card.shadow
           .card-body
             h2.mb-4.text-center Register
+            if error
+              .alert.alert-danger= error
             form(action="/register" method="POST")
               .mb-3
                 label.form-label(for="firstname") First Name

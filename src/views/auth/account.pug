@@ -4,6 +4,9 @@ block content
   .container.mt-5
     .row
       .col-md-8.offset-md-2.text-center
-        h1.display-4 Account Details
+        h1.display-4= `Welcome, ${user.firstName} ${user.lastName}!`
         p.lead Here you can manage your account settings.
+        p.lead= `Email: ${user.email}`
         hr.my-4
+        form(action="/logout", method="post")
+          button.btn.btn-danger(type="submit") Logout
