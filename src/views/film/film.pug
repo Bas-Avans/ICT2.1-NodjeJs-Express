@@ -27,6 +27,12 @@ block content
                 .col-auto
                   i.bi.bi-translate.me-2
                   span= film.language_name
+          .d-flex.justify-content-between
+            .d-flex.align-items-center
+              p.mb-md-0 There are #{availableCount} copies available for rent.
+            form(action="/rentals" method="post")
+              input(type="hidden" name="film_id" value=film.film_id)
+              button.btn.btn-primary(type="submit" disabled=(availableCount <= 0 || !user)) Rent this film
           hr.my-4
           h2.display-5.mb-4 Cast
           .row.mt-4

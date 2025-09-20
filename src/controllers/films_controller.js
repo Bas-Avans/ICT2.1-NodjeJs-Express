@@ -1,4 +1,5 @@
 const filmService = require("../services/films_service");
+const rentalService = require("../services/rentals_service");
 const { getPagination } = require("../util/pagination");
 
 /*
@@ -39,9 +40,14 @@ exports.getFilm = (req, res, next) => {
     if (err) {
       next({ error: err.message });
     } else {
-      const model = { film };
-      const view = "film/film";
-      res.render(view, model);
+      rentalService.checkFilmInventory(filmId, (err, availableCount) => {
+        if (err) {
+          return next({ error: err.message });
+        }
+        const model = { film, availableCount };
+        const view = "film/film";
+        res.render(view, model);
+      });
     }
   });
 };
