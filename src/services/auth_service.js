@@ -5,7 +5,7 @@ const pool = require("../util/mysql");
 */
 exports.createUser = function (userData, callback) {
   pool.query(
-    "INSERT INTO customer (first_name, last_name, email, password) VALUES (?, ?, ?, ?)",
+    "INSERT INTO customer (first_name, last_name, email, password, store_id, address_id) VALUES (?, ?, ?, ?, 1, 1)",
     [
       userData.firstName,
       userData.lastName,
@@ -16,7 +16,31 @@ exports.createUser = function (userData, callback) {
       if (err) {
         return callback(err);
       }
-      callback(null, results.insertId);
+      pool.query(
+        "SELECT * FROM customer WHERE customer_id = ?",
+        [results.insertId],
+        (err, results) => {
+          if (err) {
+            return callback(err);
+          }
+          const user = results[0];
+          callback(null, user);
+        }
+      );
+    }
+  );
+};
+
+exports.getUserByEmail = function (email, callback) {
+  pool.query(
+    "SELECT * FROM customer WHERE email = ?",
+    [email],
+    (err, results) => {
+      if (err) {
+        return callback(err);
+      }
+      const user = results[0];
+      callback(null, user);
     }
   );
 };

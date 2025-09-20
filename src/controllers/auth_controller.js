@@ -20,9 +20,20 @@ exports.account = function (req, res, next) {
 // Handle login logic here
 exports.handleLogin = function (req, res, next) {
   const { email, password } = req.body;
-  const user = { id: 1, email: email, firstName: "John", lastName: "Doe" };
-  req.session.user = user;
-  res.redirect("/");
+  authService.getUserByEmail(email, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.render("auth/login", { error: "Invalid email or password." });
+    }
+    const passwordMatch = bcrypt.compareSync(password, user.password);
+    if (!passwordMatch) {
+      return res.render("auth/login", { error: "Invalid email or password." });
+    }
+    req.session.user = user;
+    res.redirect("/");
+  });
 };
 
 // Handle registration logic here
@@ -37,10 +48,16 @@ exports.handleRegister = function (req, res, next) {
     passwordHash: passwordHash,
   };
 
-  authService.createUser(userData, (err, userId) => {
+  authService.createUser(userData, (err, user) => {
     if (err) {
       return next(err);
     }
+    if (!user) {
+      return res.render("auth/register", {
+        error: "Registration failed. Please try again.",
+      });
+    }
+    req.session.user = user;
     res.redirect("/");
   });
 };
