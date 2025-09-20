@@ -44,3 +44,44 @@ exports.getUserByEmail = function (email, callback) {
     }
   );
 };
+
+exports.updateUserDetails = function (
+  userId,
+  firstName,
+  lastName,
+  email,
+  callback
+) {
+  pool.query(
+    "UPDATE customer SET first_name = ?, last_name = ?, email = ? WHERE customer_id = ?",
+    [firstName, lastName, email, userId],
+    (err) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null);
+    }
+  );
+};
+
+exports.updateUserPassword = function (userId, newPasswordHash, callback) {
+  pool.query(
+    "UPDATE customer SET password = ? WHERE customer_id = ?",
+    [newPasswordHash, userId],
+    (err) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null);
+    }
+  );
+};
+
+exports.deleteUser = function (userId, callback) {
+  pool.query("DELETE FROM customer WHERE customer_id = ?", [userId], (err) => {
+    if (err) {
+      return callback(err);
+    }
+    callback(null);
+  });
+};

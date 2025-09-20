@@ -11,20 +11,20 @@ block content
               .alert.alert-danger= error
             form(action="/register" method="POST")
               .mb-3
-                label.form-label(for="firstname") First Name
-                input#firstname.form-control(type="text" name="firstname" required placeholder="Enter your first name")
+                label.form-label(for="first_name") First Name
+                input#first_name.form-control(type="text" name="first_name" required placeholder="Enter your first name")
               .mb-3
-                label.form-label(for="lastname") Last Name
-                input#lastname.form-control(type="text" name="lastname" required placeholder="Enter your last name")
+                label.form-label(for="last_name") Last Name
+                input#last_name.form-control(type="text" name="last_name" required placeholder="Enter your last name")
               .mb-3
                 label.form-label(for="email") Email
                 input#email.form-control(type="email" name="email" required placeholder="Enter your email")
               .mb-3
                 label.form-label(for="password") Password
                 input#password.form-control(type="password" name="password" required placeholder="Create a password")
-              //- .mb-3
-              //-   label.form-label(for="confirm_password") Confirm Password
-              //-   input#confirm_password.form-control(type="password" name="confirm_password" required placeholder="Confirm your password")
+              .mb-3
+                label.form-label(for="confirm_password") Confirm Password
+                input#confirm_password.form-control(type="password" name="confirm_password" required placeholder="Confirm your password")
               button.btn.btn-primary.w-100(type="submit") Register
             .mt-3.text-center
               span Already have an account? 

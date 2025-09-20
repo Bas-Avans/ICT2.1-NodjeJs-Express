@@ -13,7 +13,13 @@ router.get("/account", authController.account);
 router.post("/login", authController.handleLogin);
 /* POST register */
 router.post("/register", authController.handleRegister);
+/* POST update account details */
+router.post("/account/update", authController.updateAccount);
+/* POST change password */
+router.post("/account/password", authController.changePassword);
 /* POST logout */
 router.post("/logout", authController.handleLogout);
+/* POST delete account */
+router.post("/account/delete", authController.deleteAccount);
 
 module.exports = router;
