@@ -78,10 +78,19 @@ exports.updateUserPassword = function (userId, newPasswordHash, callback) {
 };
 
 exports.deleteUser = function (userId, callback) {
-  pool.query("DELETE FROM customer WHERE customer_id = ?", [userId], (err) => {
+  pool.query("DELETE FROM rental WHERE customer_id = ?", [userId], (err) => {
     if (err) {
       return callback(err);
     }
-    callback(null);
+    pool.query(
+      "DELETE FROM customer WHERE customer_id = ?",
+      [userId],
+      (err) => {
+        if (err) {
+          return callback(err);
+        }
+        callback(null);
+      }
+    );
   });
 };
