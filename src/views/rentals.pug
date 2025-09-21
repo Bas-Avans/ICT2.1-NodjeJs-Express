@@ -5,28 +5,31 @@ block content
     .row
       .col-md-8.offset-md-2.text-center
         h1.display-4 Rentals
-        p.lead You have rented #{rentals.length} films.
-        if (success)
-          .alert.alert-success= success
-        hr.my-4
-        table.table.table-striped
+        if rentals.length === 0
+          p.lead You have not rented any films yet.
+        else
+          p.lead You have rented #{rentals.length} films.
+          if (success)
+            .alert.alert-success= success
+          hr.my-4
+          table.table.table-striped
             thead
-                tr
-                    th Film Name
-                    th Rental Date
-                    th Returned
+              tr
+                th Film Name
+                th Rental Date
+                th Returned
             tbody
-                each rental in rentals
-                    tr
-                        td
-                            a(href=`/films/${rental.film_id}`)= rental.title
-                        td= rental.rental_date.toLocaleDateString()
-                        td
-                            if rental.returned
-                                span.text-success Yes
-                            else
-                                span.text-danger No
-                        td 
-                            if !rental.returned
-                                form(action=`/rentals/${rental.rental_id}/return` method="POST")
-                                    button.btn.btn-sm.btn-primary(type="submit") Return
+              each rental in rentals
+                tr
+                  td
+                    a(href=`/films/${rental.film_id}`)= rental.title
+                  td= `${new Date(rental.rental_date).toLocaleDateString()} - ${new Date(rental.rental_date).toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' })}`
+                  td
+                    if rental.returned
+                      span.text-success Yes
+                    else
+                      span.text-danger No
+                  td 
+                    if !rental.returned
+                      form(action=`/rentals/${rental.rental_id}/return` method="POST")
+                        button.btn.btn-sm.btn-primary(type="submit") Return

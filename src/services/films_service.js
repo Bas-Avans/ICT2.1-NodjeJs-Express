@@ -63,6 +63,9 @@ exports.searchFilms = (searchQuery, page, pageSize, callback) => {
   );
 };
 
+/*
+  Get the 10 most rented films
+*/
 exports.get10MostRentedFilms = (callback) => {
   pool.query(
     `SELECT f.*, COUNT(r.rental_id) AS rentals FROM film AS f 

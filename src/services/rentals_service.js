@@ -1,8 +1,15 @@
 const pool = require("../util/mysql");
 
+/*
+  Get rentals by user ID
+*/
 exports.getRentalsByUserId = function (userId, callback) {
   pool.query(
-    "SELECT r.rental_id, r.rental_date, r.return_date, f.title, f.film_id FROM rental r JOIN inventory i ON r.inventory_id = i.inventory_id JOIN film f ON i.film_id = f.film_id WHERE r.customer_id = ?",
+    `SELECT r.rental_id, r.rental_date, r.return_date, f.title, f.film_id FROM rental r 
+    JOIN inventory i ON r.inventory_id = i.inventory_id 
+    JOIN film f ON i.film_id = f.film_id 
+    WHERE r.customer_id = ?
+    ORDER BY r.rental_date DESC`,
     [userId],
     (err, results) => {
       if (err) {
@@ -13,6 +20,9 @@ exports.getRentalsByUserId = function (userId, callback) {
   );
 };
 
+/*
+  Check available inventory for a film
+*/
 exports.checkFilmInventory = function (filmId, callback) {
   pool.query(
     `SELECT COUNT(*) AS count
@@ -31,6 +41,11 @@ exports.checkFilmInventory = function (filmId, callback) {
   );
 };
 
+/*
+  Create a new rental based on user ID and film ID
+  While checking for available inventory
+  Note: using a default staff ID of 1
+*/
 exports.createRental = function (userId, filmId, callback) {
   this.checkFilmInventory(filmId, (err, availableCount) => {
     if (err) {
@@ -54,6 +69,9 @@ exports.createRental = function (userId, filmId, callback) {
   });
 };
 
+/* 
+  Return a rental (set return_date to now)
+*/
 exports.returnRental = function (userId, rentalId, callback) {
   const returnDate = new Date();
   pool.query(

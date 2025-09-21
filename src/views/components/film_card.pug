@@ -4,3 +4,5 @@
     .card-body
       h5.card-title= film.title
       p.card-text= film.description
+      if film.rentals
+        p.text-muted.mb-0= `${film.rentals} rentals`

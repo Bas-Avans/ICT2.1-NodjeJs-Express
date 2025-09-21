@@ -57,6 +57,9 @@ exports.searchActors = (searchQuery, page, pageSize, callback) => {
   );
 };
 
+/* 
+  Get the 10 most active actors (by number of films)
+*/
 exports.get10MostActiveActors = (callback) => {
   pool.query(
     `SELECT a.*, COUNT(fa.film_id) AS film_count FROM actor a 

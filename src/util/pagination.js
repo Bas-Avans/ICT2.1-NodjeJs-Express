@@ -1,3 +1,6 @@
+/*
+  Utility function to generate pagination links
+*/
 exports.getPagination = (currentPage, totalPages) => {
   const pages = [];
   if (totalPages <= 7) {

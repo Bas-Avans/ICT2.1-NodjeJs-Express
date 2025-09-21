@@ -2,18 +2,18 @@ extends layout
 
 block content
   .container.mt-5
-    .row
-      .col-md-8.offset-md-2.text-center
-        h1.display-4 Express
-        p.lead Welcome to Express
+    .row.justify-content-center
+      .col-md-8.text-center
+        h1.display-4.mb-3 Express Films
+        p.lead.mb-4.text-secondary Sign up now to rent your film on Express
         hr.my-4
-        h2 Top 10 Most Rented Films
-        ul.list-unstyled
-          each film in films
-            li
-              a(href=`/films/${film.film_id}`) #{film.title} - #{film.rentals} rentals
-        h2 Top 10 Most Active Actors
-        ul.list-unstyled
-          each actor in actors
-            li
-              a(href=`/actors/${actor.actor_id}`) #{actor.first_name} #{actor.last_name} - #{actor.film_count} films
+        h2.mb-3 Top 10 Most Rented Films
+        .horizontal-scroll
+          ul.list-unstyled.d-flex.flex-row.overflow-auto.p-0.m-0.gap-3
+            each film in films
+              include components/film_card
+        h2.mb-3 Top 10 Most Active Actors
+        .horizontal-scroll
+          ul.list-unstyled.d-flex.flex-row.overflow-auto.p-0.m-0.gap-3
+            each actor in actors
+              include components/actor_card

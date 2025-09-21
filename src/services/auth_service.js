@@ -1,7 +1,8 @@
 const pool = require("../util/mysql");
 
 /*
-    Create a new user
+  Create a new user and return the created user
+  Note: using default store_id and address_id of 1
 */
 exports.createUser = function (userData, callback) {
   pool.query(
@@ -31,6 +32,9 @@ exports.createUser = function (userData, callback) {
   );
 };
 
+/*
+  Get a user by their email
+*/
 exports.getUserByEmail = function (email, callback) {
   pool.query(
     "SELECT * FROM customer WHERE email = ?",
@@ -45,6 +49,9 @@ exports.getUserByEmail = function (email, callback) {
   );
 };
 
+/*
+  Update user details (first name, last name, email)
+*/
 exports.updateUserDetails = function (
   userId,
   firstName,
@@ -64,6 +71,9 @@ exports.updateUserDetails = function (
   );
 };
 
+/*
+  Update user password
+*/
 exports.updateUserPassword = function (userId, newPasswordHash, callback) {
   pool.query(
     "UPDATE customer SET password = ? WHERE customer_id = ?",
@@ -77,6 +87,9 @@ exports.updateUserPassword = function (userId, newPasswordHash, callback) {
   );
 };
 
+/*
+  Delete a user and their associated rentals
+*/
 exports.deleteUser = function (userId, callback) {
   pool.query("DELETE FROM rental WHERE customer_id = ?", [userId], (err) => {
     if (err) {

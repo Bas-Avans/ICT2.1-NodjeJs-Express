@@ -7,4 +7,6 @@
         style="width: 100%; height: auto; max-width: 120px; margin-bottom: 15px;"
       )
       h5.card-title= `${actor.first_name} ${actor.last_name}`
+      if actor.film_count
+        p.text-muted.mb-0= `${actor.film_count} films`
       
