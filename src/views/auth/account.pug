@@ -24,7 +24,7 @@ block content
               .form-group
                 label(for="email") Email
                 input.form-control(type="email", name="email", id="email", value=user.email, required)
-              button.btn.btn-primary.mt-2(type="submit") Update Account
+              button.btn.btn-primary.mt-2(type="submit", id="update-account") Update Account
         .card.mb-4.shadow
           .card-body
             h5.card-title.mb-3 Change Password
@@ -42,7 +42,7 @@ block content
               .form-group
                 label(for="confirm_password") Confirm New Password
                 input.form-control(type="password", name="confirm_password", id="confirm_password", required)
-              button.btn.btn-primary.mt-2(type="submit") Update Password
+              button.btn.btn-primary.mt-2(type="submit", id="update-password") Update Password
         .d-flex.justify-content-between.mt-4.mb-4
           form(action="/logout", method="post")
             button.btn.btn-danger(type="submit") Logout
